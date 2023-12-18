@@ -24,6 +24,18 @@
                 </div>
             </button>
         </form>
+        @if (session('edited'))
+            <p class="text-indigo-500 text-xs">{{ session('edited') }}</p>
+        @endif
+        @if (session('success'))
+            <p class="text-teal-400 text-xs">{{ session('success') }}</p>
+        @endif
+        @if (session('deleted'))
+            <p class="text-red-400 text-xs">{{ session('deleted') }}</p>
+        @endif
+        @if (session('error'))
+            <p class="text-red-400 text-xs">{{ session('error') }}</p>
+        @endif
     </div>
     @if (count($tasks) == 0)
         <div class="px-4 py-2 border border-r-white/50 border-b-white/50 p-4 rounded-xl flex gap-1 justify-center">
@@ -42,7 +54,7 @@
             @foreach ($tasks as $task)
                 <div class="px-4 py-2 flex justify-between items-center rounded">
                     <div class="mt-1 flex items-center gap-x-1.5">
-                        <div class="flex-none rounded-full bg-emerald-500/20 p-1 animate-ping">
+                        <div class="flex-none rounded-full bg-emerald-500/20 p-1">
                             <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
                         </div>
                         <p class="text-sm text-white">{{ $task->list }}</p>

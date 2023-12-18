@@ -18,16 +18,30 @@ class TaskController extends Controller
     {
         $newTask = $request->post('task');
 
-        DB::table('tasks')->insert([
-            'list' => $newTask
-        ]);
+        try {
+            DB::table('tasks')->insert([
+                'list' => $newTask,
+                'created_at' => new \DateTime()
+            ]);
 
-        return redirect()->action([TaskController::class, 'home']);
+            session()->flash('success', 'Adding task success!');
+
+            return redirect()->action([TaskController::class, 'home']);
+        } catch (\Exception $exception) {
+            session()->flash('error', 'Insert failed!');
+
+            return redirect('/');
+        }
+
+
     }
 
     public function delete(Request $request)
     {
         $idTask = $request->post('id');
+
+        $nameTaskYouWantDelete = DB::table('tasks')->where('id', '=', $idTask)->get();
+        session()->flash('deleted', "task {$nameTaskYouWantDelete[0]->list} deleted!");
 
         DB::table('tasks')->where('id', '=', $idTask)->delete();
 
@@ -46,12 +60,17 @@ class TaskController extends Controller
     public function postEdit(Request $request)
     {
         $idStore = $request->get('id');
+        $taskBefore = DB::table('tasks')->where('id', '=', $idStore)->get();
+
         $newEditedList = $request->post('task');
 
         DB::table('tasks')->where('id', '=', $idStore)->update([
-            'list' => $newEditedList
+            'list' => $newEditedList,
+            'updated_at' => new \DateTime()
         ]);
 
-        return redirect()->action([TaskController::class, 'home']);
+        session()->flash('edited', "{$taskBefore[0]->list} > {$newEditedList}");
+
+        return redirect('/');
     }
 }

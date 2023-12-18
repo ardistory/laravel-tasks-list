@@ -26,7 +26,7 @@
             <ul class="flex gap-6 mr-5 text-zinc-500">
                 <a href="/">
                     <div
-                        class="{{ request()->is('/') ? 'bg-white/[0.1] text-white' : '' }} hover:text-white py-1 px-2 rounded-full flex items-center gap-1">
+                        class="{{ request()->is('/') ? 'bg-white text-black' : '' }} hover:text-white py-1 px-2 rounded-full flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -39,7 +39,7 @@
                 </a>
                 <a href="/about">
                     <div
-                        class="{{ request()->is('about') ? 'bg-white/[0.1] text-white' : '' }} hover:text-white py-1 px-2 rounded-full flex items-center gap-1">
+                        class="{{ request()->is('about') ? 'bg-white text-black' : '' }} hover:text-white py-1 px-2 rounded-full flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -52,7 +52,7 @@
                 </a>
                 <a href="/profile">
                     <div
-                        class="{{ request()->is('profile') ? 'bg-white/[0.1] text-white' : '' }} hover:text-white py-1 px-2 rounded-full flex items-center gap-1">
+                        class="{{ request()->is('profile') ? 'bg-white text-black' : '' }} hover:text-white py-1 px-2 rounded-full flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -66,15 +66,15 @@
             </ul>
         </div>
     </div>
-    <div x-show="open" class="absolute bg-black w-full h-1/2 top-14">
+    <div x-show="open" class="absolute bg-black w-full h-4/5 top-14 z-10">
         <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3 w-full text-zinc-500">
             <a href="/"
-                class="{{ request()->is('/') ? 'bg-gray-900 text-white' : '' }} hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                class="{{ request()->is('/') ? 'bg-white text-black' : '' }} hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium"
                 aria-current="page">Home</a>
             <a href="/about"
-                class="{{ request()->is('about') ? 'bg-gray-900 text-white' : '' }} hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">About</a>
+                class="{{ request()->is('about') ? 'bg-white text-black' : '' }} hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium">About</a>
             <a href="/profile"
-                class="{{ request()->is('profile') ? 'bg-gray-900 text-white' : '' }} hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Profile</a>
+                class="{{ request()->is('profile') ? 'bg-white text-black' : '' }} hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium">Profile</a>
         </div>
     </div>
 </div>
