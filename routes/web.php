@@ -8,6 +8,8 @@ Route::post('/', [TaskController::class, 'store']);
 Route::post('/delete', [TaskController::class, 'delete']);
 Route::get('/edit', [TaskController::class, 'getEdit']);
 Route::post('/edit', [TaskController::class, 'postEdit']);
+Route::post('/checked', [TaskController::class, 'postChecked']);
+Route::post('/unchecked', [TaskController::class, 'postUnchecked']);
 
 Route::get('/about', function () {
     return view('about');

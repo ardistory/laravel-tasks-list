@@ -1,4 +1,4 @@
-<div class="w-full max-w-xl mb-4 md:mb-0">
+<div class="w-full max-w-xl mb-4">
     <h1 class="text-2xl font-semibold flex gap-1 items-center">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -25,16 +25,22 @@
             </button>
         </form>
         @if (session('edited'))
-            <p class="text-indigo-500 text-xs">{{ session('edited') }}</p>
+            <p class="text-indigo-400 font-semibold text-xs">{{ session('edited') }}</p>
         @endif
         @if (session('success'))
-            <p class="text-teal-400 text-xs">{{ session('success') }}</p>
+            <p class="text-teal-400 font-semibold text-xs">{{ session('success') }}</p>
         @endif
         @if (session('deleted'))
-            <p class="text-red-400 text-xs">{{ session('deleted') }}</p>
+            <p class="text-red-400 font-semibold text-xs">{{ session('deleted') }}</p>
         @endif
         @if (session('error'))
-            <p class="text-red-400 text-xs">{{ session('error') }}</p>
+            <p class="text-red-400 font-semibold text-xs">{{ session('error') }}</p>
+        @endif
+        @if (session('checked'))
+            <p class="text-indigo-500 font-semibold text-xs">{{ session('checked') }}</p>
+        @endif
+        @if (session('unchecked'))
+            <p class="text-rose-500 font-semibold text-xs">{{ session('unchecked') }}</p>
         @endif
     </div>
     @if (count($tasks) == 0)
@@ -58,6 +64,16 @@
                             <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
                         </div>
                         <p class="text-sm text-white">{{ $task->list }}</p>
+                        @if ($task->mark == true)
+                            <div class="scale-75">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-6 h-6">
+                                    <path fill-rule="evenodd"
+                                        d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        @endif
                     </div>
                     <div class="flex gap-1">
                         <form action="/edit" method="get">
@@ -85,6 +101,26 @@
                                     </svg>
                                 </div>
                                 Delete
+                            </button>
+                        </form>
+                        <form action="{{ $task->mark == true ? '/unchecked' : '/checked' }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $task->id }}">
+                            <button class="hover:text-white/90">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="w-6 h-6">
+                                        @if ($task->mark == true)
+                                            <path fill-rule="evenodd"
+                                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z"
+                                                clip-rule="evenodd" />
+                                        @else
+                                            <path fill-rule="evenodd"
+                                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                                                clip-rule="evenodd" />
+                                        @endif
+                                    </svg>
+                                </div>
                             </button>
                         </form>
                     </div>

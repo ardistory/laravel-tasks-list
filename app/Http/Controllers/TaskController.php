@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,9 +20,8 @@ class TaskController extends Controller
         $newTask = $request->post('task');
 
         try {
-            DB::table('tasks')->insert([
-                'list' => $newTask,
-                'created_at' => new \DateTime()
+            Task::query()->create([
+                'list' => $newTask
             ]);
 
             session()->flash('success', 'Adding task success!');
@@ -40,10 +40,10 @@ class TaskController extends Controller
     {
         $idTask = $request->post('id');
 
-        $nameTaskYouWantDelete = DB::table('tasks')->where('id', '=', $idTask)->get();
-        session()->flash('deleted', "task {$nameTaskYouWantDelete[0]->list} deleted!");
+        $nameTaskYouWantDelete = Task::query()->where('id', '=', $idTask)->get();
+        session()->flash('deleted', "{$nameTaskYouWantDelete[0]->list} deleted!");
 
-        DB::table('tasks')->where('id', '=', $idTask)->delete();
+        Task::query()->where('id', '=', $idTask)->delete();
 
         return redirect()->action([TaskController::class, 'home']);
     }
@@ -53,23 +53,52 @@ class TaskController extends Controller
         $idEdit = $request->get('id');
 
         return view('edit', [
-            'bahanEdit' => DB::table('tasks')->where('id', '=', $idEdit)->get()
+            'bahanEdit' => Task::query()->where('id', '=', $idEdit)->get()
         ]);
     }
 
     public function postEdit(Request $request)
     {
         $idStore = $request->get('id');
-        $taskBefore = DB::table('tasks')->where('id', '=', $idStore)->get();
+        $taskBefore = Task::query()->where('id', '=', $idStore)->get();
 
         $newEditedList = $request->post('task');
 
-        DB::table('tasks')->where('id', '=', $idStore)->update([
-            'list' => $newEditedList,
-            'updated_at' => new \DateTime()
+        Task::query()->find($idStore)->update([
+            'list' => $newEditedList
         ]);
 
         session()->flash('edited', "{$taskBefore[0]->list} > {$newEditedList}");
+
+        return redirect('/');
+    }
+
+    public function postChecked(Request $request)
+    {
+        $idList = $request->post('id');
+
+        Task::query()->find($idList)->update([
+            'mark' => true
+        ]);
+
+        $namaListChecked = Task::query()->where('id', '=', $idList)->get('list');
+
+        session()->flash('checked', "{$namaListChecked[0]->list} checked");
+
+        return redirect('/');
+    }
+
+    public function postUnchecked(Request $request)
+    {
+        $idList = $request->post('id');
+
+        Task::query()->find($idList)->update([
+            'mark' => false
+        ]);
+
+        $namaListChecked = Task::query()->where('id', '=', $idList)->get('list');
+
+        session()->flash('unchecked', "{$namaListChecked[0]->list} unchecked");
 
         return redirect('/');
     }

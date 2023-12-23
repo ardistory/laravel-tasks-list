@@ -13,7 +13,7 @@
         <form method="post" class="gap-1 flex items-center" autocomplete="off">
             @csrf
             <input type="text" name="task" class="outline-none text-black px-2 py-1 rounded-md w-full"
-                value="{{ $targol }}">
+                value="{{ $list }}">
             <button
                 class="border border-white rounded-md active:ring-2 active:ring-teal-300 inline-flex gap-1 hover:bg-slate-900 px-2 py-1">
                 <div>
@@ -27,7 +27,7 @@
             </button>
         </form>
     </div>
-    <div class="mt-4">
+    <div class="mt-4 flex justify-between">
         <a href="/" class="inline-flex gap-1 border border-white rounded-md px-3 py-1 hover:bg-slate-900">
             <div class="text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -37,5 +37,8 @@
             </div>
             back
         </a>
+        <div class="inline-flex gap-1 border border-white rounded-md px-3 py-1">
+            Created at {{ $created }}
+        </div>
     </div>
 </div>

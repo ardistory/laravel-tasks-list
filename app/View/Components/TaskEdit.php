@@ -8,13 +8,15 @@ use Illuminate\View\Component;
 
 class TaskEdit extends Component
 {
-    public $targol;
+    public $list;
+    public $created;
     /**
      * Create a new component instance.
      */
-    public function __construct($bahanEdit)
+    public function __construct($list, $created)
     {
-        $this->targol = $bahanEdit;
+        $this->list = $list;
+        $this->created = $created;
     }
 
     /**

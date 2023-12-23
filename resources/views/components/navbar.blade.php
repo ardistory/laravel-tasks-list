@@ -26,7 +26,7 @@
             <ul class="flex gap-6 mr-5 text-zinc-500">
                 <a href="/">
                     <div
-                        class="{{ request()->is('/') ? 'bg-white text-black' : '' }} hover:text-white py-1 px-2 rounded-full flex items-center gap-1">
+                        class="{{ request()->is('/') ? 'bg-white text-black' : 'hover:text-white' }} py-1 px-2 rounded-full flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -39,7 +39,7 @@
                 </a>
                 <a href="/about">
                     <div
-                        class="{{ request()->is('about') ? 'bg-white text-black' : '' }} hover:text-white py-1 px-2 rounded-full flex items-center gap-1">
+                        class="{{ request()->is('about') ? 'bg-white text-black' : 'hover:text-white' }} py-1 px-2 rounded-full flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -52,7 +52,7 @@
                 </a>
                 <a href="/profile">
                     <div
-                        class="{{ request()->is('profile') ? 'bg-white text-black' : '' }} hover:text-white py-1 px-2 rounded-full flex items-center gap-1">
+                        class="{{ request()->is('profile') ? 'bg-white text-black' : 'hover:text-white' }} py-1 px-2 rounded-full flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
